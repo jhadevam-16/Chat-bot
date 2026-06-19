@@ -79,7 +79,7 @@ logger = logging.getLogger(__name__)
 def get_tool_definitions() -> list[types.Tool]:
     return [
 
-        # ── Tool 1 ──────────────────────────────────────────────────────────
+      
         types.Tool(
             name="list_files",
             description="List all files and folders in a folder in Azure Data Lake.",
@@ -95,7 +95,7 @@ def get_tool_definitions() -> list[types.Tool]:
             }
         ),
 
-        # ── Tool 2 ──────────────────────────────────────────────────────────
+        
         types.Tool(
             name="get_file_properties",
             description="""Get properties of a file such as size, type, and last modified date.
@@ -113,7 +113,7 @@ def get_tool_definitions() -> list[types.Tool]:
             }
         ),
 
-        # ── Tool 3 ──────────────────────────────────────────────────────────
+        
         types.Tool(
             name="read_file",
             description="""Read the full contents of a file from Azure Data Lake.
@@ -131,7 +131,7 @@ def get_tool_definitions() -> list[types.Tool]:
             }
         ),
 
-        # ── Tool 4 ──────────────────────────────────────────────────────────
+        
         types.Tool(
             name="read_file_chunk",
             description="""Read a specific section of a file by line numbers.
@@ -157,7 +157,7 @@ def get_tool_definitions() -> list[types.Tool]:
             }
         ),
 
-        # ── Tool 5 ──────────────────────────────────────────────────────────
+       
         types.Tool(
             name="sample_file",
             description="""Quickly sample a large file by reading only the
@@ -176,7 +176,7 @@ def get_tool_definitions() -> list[types.Tool]:
             }
         ),
 
-        # ── Tool 6 ──────────────────────────────────────────────────────────
+        
         types.Tool(
             name="search_in_file",
             description="""Search for a specific value in a specific column of a large file.
@@ -214,13 +214,13 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
     logger.debug(f"Tool called: {name} | Args: {arguments}")
 
     try:
-        # ── Tool 1 Handler ───────────────────────────────────────────────────
+       
         if name == "list_files":
             folder_path = arguments.get("folder_path", "/")
             result = list_files(folder_path)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Tool 2 Handler ───────────────────────────────────────────────────
+        
         elif name == "get_file_properties":
             file_path = arguments.get("file_path")
             if not file_path:
@@ -228,7 +228,7 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
             result = get_file_properties(file_path)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Tool 3 Handler ───────────────────────────────────────────────────
+        
         elif name == "read_file":
             file_path = arguments.get("file_path")
             if not file_path:
@@ -236,7 +236,7 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
             result = read_file(file_path)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Tool 4 Handler ───────────────────────────────────────────────────
+        
         elif name == "read_file_chunk":
             file_path = arguments.get("file_path")
             if not file_path:
@@ -246,7 +246,7 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
             result = read_file_chunk(file_path, start_line, num_lines)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Tool 5 Handler ───────────────────────────────────────────────────
+        
         elif name == "sample_file":
             file_path = arguments.get("file_path")
             if not file_path:
@@ -254,7 +254,7 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
             result = sample_file(file_path)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Tool 6 Handler ───────────────────────────────────────────────────
+        
         elif name == "search_in_file":
             file_path = arguments.get("file_path")
             search_column = arguments.get("search_column")
@@ -265,7 +265,7 @@ def handle_tool_call(name: str, arguments: dict) -> list[types.TextContent]:
             result = search_in_file(file_path, search_column, search_value, max_results)
             return [types.TextContent(type="text", text=str(result))]
 
-        # ── Unknown Tool ─────────────────────────────────────────────────────
+        
         else:
             logger.warning(f"Unknown tool called: {name}")
             return [types.TextContent(type="text", text=f"Error: Unknown tool '{name}'")]
