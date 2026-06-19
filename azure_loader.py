@@ -52,9 +52,6 @@ def download_as_dataframe(file_path: str) -> pd.DataFrame:
         raise ValueError(f"Unsupported file type: {ext}")
 
 
-# ════════════════════════════════════════════════════════════
-# DUCKDB CONNECTION
-# ════════════════════════════════════════════════════════════
 
 _duck_con    = None
 _duck_failed = False
@@ -80,9 +77,7 @@ def get_duck_con():
         raise RuntimeError(f"DuckDB init failed: {str(e)}")
 
 
-# ════════════════════════════════════════════════════════════
-# SCHEMA CACHE
-# ════════════════════════════════════════════════════════════
+
 
 _schema_cache: dict = {}
 
@@ -148,9 +143,7 @@ def list_schema_cache() -> str:
     return out
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 1 — List Files
-# ════════════════════════════════════════════════════════════
+
 
 def list_files(directory_path: str = "/"):
     try:
@@ -196,9 +189,7 @@ def list_files(directory_path: str = "/"):
         return f"Error listing files: {str(e)} | {traceback.format_exc()}"
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 2 — File Properties
-# ════════════════════════════════════════════════════════════
+
 
 def get_file_properties(file_path: str) -> str:
     try:
@@ -227,7 +218,7 @@ def get_file_properties(file_path: str) -> str:
                 )
 
         return f"""FILE PROPERTIES
-═══════════════════════════════
+
 Name          : {file_path}
 Size          : {size_str} ({size_bytes:,} bytes)
 Last Modified : {props.last_modified}
@@ -238,9 +229,7 @@ File Type     : {ext}{schema_info}"""
         return f"Error getting properties: {str(e)} | {traceback.format_exc()}"
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 3 — Get Schema
-# ════════════════════════════════════════════════════════════
+
 
 def get_schema_tool(file_path: str) -> str:
     file_path = file_path.lstrip("/")
@@ -264,9 +253,7 @@ def get_schema_tool(file_path: str) -> str:
     )
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 4 — DuckDB Query (with SDK fallback)
-# ════════════════════════════════════════════════════════════
+
 
 def _format_query_result(df, elapsed, sql_resolved, export_excel, note=""):
     if df.empty:
@@ -433,9 +420,7 @@ def duckdb_query(sql: str, export_excel: bool = False) -> str:
         )
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 5 — Read Small Text File
-# ════════════════════════════════════════════════════════════
+
 
 def read_file(file_path: str) -> str:
     try:
@@ -573,9 +558,7 @@ def refresh_file_index() -> str:
     return f"✅ File index refreshed — {len(_file_index)} files indexed."
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL 6 — Search Column Across All Files (NEW)
-# ════════════════════════════════════════════════════════════
+
 
 def search_column(column_name: str) -> str:
     """
@@ -615,7 +598,7 @@ def search_column(column_name: str) -> str:
         result += "ℹ️  Only cached schemas were checked. Type 'search_column' again after more files are queried for broader results."
         return result
 
-    # ── Step 2: Scan all parquet/csv files ────────────────────
+
     print(f"   🔍 Scanning all schemas for column '{column_name}'...", flush=True)
 
     data_files  = [
