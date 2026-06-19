@@ -36,9 +36,7 @@ context = {
     "last_file":      None,
 }
 
-# ════════════════════════════════════════════════════════════
-# SYSTEM PROMPT
-# ════════════════════════════════════════════════════════════
+
 
 SYSTEM_PROMPT = f"""You are an Azure Data Lake assistant for Vaibhav Global Limited.
 You help users explore and analyze files stored in Azure Data Lake using plain English.
@@ -142,9 +140,6 @@ SUGGESTED ACTIONS
 After every answer add 2-3 short suggestions on ONE line separated by |."""
 
 
-# ════════════════════════════════════════════════════════════
-# TOOLS
-# ════════════════════════════════════════════════════════════
 
 TOOLS = [
     # ── Tool 1 — List Files ──────────────────────────────────
@@ -303,9 +298,7 @@ TOOLS = [
 ]
 
 
-# ════════════════════════════════════════════════════════════
-# TOOL EXECUTOR
-# ════════════════════════════════════════════════════════════
+
 
 def execute_tool(tool_name: str, tool_args: dict) -> str:
     try:
@@ -352,9 +345,7 @@ def execute_tool(tool_name: str, tool_args: dict) -> str:
         return f"Error in {tool_name}: {str(e)}\n{traceback.format_exc()}"
 
 
-# ════════════════════════════════════════════════════════════
-# MAIN CHAT LOOP
-# ════════════════════════════════════════════════════════════
+
 
 def run():
     print("\n✅ Azure Data Lake Assistant — Ready!")
