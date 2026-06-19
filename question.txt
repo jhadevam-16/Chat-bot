@@ -1,0 +1,6 @@
+You: Show me the first 50 lines of MaintenanceSolution.sql
+You: What was the main purpose of that file?       ← uses memory
+You: Now show me the other SQL file
+You: Compare both files — what is the difference?  ← uses memory of both
+
+
